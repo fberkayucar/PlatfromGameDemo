@@ -4,11 +4,8 @@ public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
 
-    [SerializeField]
-    private GameObject playerPrefab;
     private GameObject player;
-    public Transform initialPlayerPosition;
-
+    public Vector2 initialPlayerPosition = new Vector2(-7, -3);
     public static PlayerManager Instance
     {
         get
@@ -30,7 +27,8 @@ public class PlayerManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        player = Instantiate(playerPrefab, initialPlayerPosition.position, Quaternion.identity);
+        player = Instantiate(Resources.Load<GameObject>("Prefabs/Player"), initialPlayerPosition, Quaternion.identity);
+        Debug.Log("Player spawned");
     }
 
     public GameObject GetPlayer()

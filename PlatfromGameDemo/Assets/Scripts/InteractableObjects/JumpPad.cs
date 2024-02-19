@@ -6,6 +6,13 @@ public class JumpPad : MonoBehaviour, IInteractable
 {
     public float jumpForce = 10f;
 
+    private Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void Interact()
     {
         JumpPlayer();
@@ -14,6 +21,12 @@ public class JumpPad : MonoBehaviour, IInteractable
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Interact();
+        animator.SetBool("isJumping", true);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        animator.SetBool("isJumping", false);
     }
 
     private void JumpPlayer()

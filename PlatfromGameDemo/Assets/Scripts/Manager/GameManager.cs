@@ -1,18 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private int currentLevel = 1;
+
+    private void Start()
+    {
+        PlayerManager.Instance.GetPlayer();
+    }
+
+    public void LoadLevel(int levelIndex)
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RestartLevel()
     {
-        
+
+    }
+
+    public void LoadNextLevel()
+    {
+
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over!");
     }
 }

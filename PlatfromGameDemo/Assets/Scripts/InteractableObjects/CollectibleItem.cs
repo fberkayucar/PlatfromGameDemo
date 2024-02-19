@@ -6,8 +6,6 @@ public class CollectibleItem : MonoBehaviour, IInteractable
 {
     public void Interact()
     {
-
-        Debug.Log("Item collected!");
         Destroy(gameObject);
         Collect();
     }

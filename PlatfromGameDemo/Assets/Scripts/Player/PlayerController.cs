@@ -11,9 +11,11 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
+    private Animator animator;
 
     private void Start()
     {
+        animator = GetComponent<Animator>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -47,6 +49,19 @@ public class PlayerController : MonoBehaviour
         else if (horizontalInput < 0)
         {
             spriteRenderer.flipX = true;
+        }
+
+        if (horizontalInput>0f)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else if (horizontalInput<0f)
+        {
+            animator.SetBool("isRunning", true);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
     }
 
