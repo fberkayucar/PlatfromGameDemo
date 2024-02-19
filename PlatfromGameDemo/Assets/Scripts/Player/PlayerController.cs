@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,10 +9,16 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private LayerMask jumpableGround;
+    [SerializeField]
+    private GameObject bulletPrefab;
+    [SerializeField]
+    private Transform bulletSpawnPoint;
+    private Quaternion bulletRotation;
     private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
+
 
     private void Start()
     {
@@ -26,6 +33,7 @@ public class PlayerController : MonoBehaviour
         Movement();
         Jump();
         ClampPosition();
+        Shoot();
     }
 
     private void Jump()
@@ -62,6 +70,22 @@ public class PlayerController : MonoBehaviour
         else
         {
             animator.SetBool("isRunning", false);
+        }
+    }
+
+    private void Shoot()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (spriteRenderer.flipX)
+            {
+                bulletRotation = Quaternion.Euler(0, 0, -90);
+            }
+            else
+            {
+                bulletRotation = Quaternion.Euler(0, 0, 90);
+            }
+            Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
         }
     }
 

@@ -15,7 +15,11 @@ public class JumpPad : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        JumpPlayer();
+        Rigidbody2D playerRigidbody = PlayerManager.Instance.GetPlayer().GetComponent<Rigidbody2D>();
+        if (playerRigidbody != null)
+        {
+            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,14 +31,5 @@ public class JumpPad : MonoBehaviour, IInteractable
     private void OnCollisionExit2D(Collision2D collision)
     {
         animator.SetBool("isJumping", false);
-    }
-
-    private void JumpPlayer()
-    {
-        Rigidbody2D playerRigidbody = PlayerManager.Instance.GetPlayer().GetComponent<Rigidbody2D>();
-        if (playerRigidbody != null)
-        {
-            playerRigidbody.velocity = new Vector2(playerRigidbody.velocity.x, jumpForce);
-        }
     }
 }
