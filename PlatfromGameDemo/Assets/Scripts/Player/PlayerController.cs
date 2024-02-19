@@ -7,12 +7,14 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 10f;
 
     [SerializeField]
-    private IsGrounded isGrounded;
+    private LayerMask jumpableGround;
+    private BoxCollider2D boxCollider2D;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
     private void Start()
     {
+        boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
@@ -20,7 +22,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Movement();
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded.grounded)
+        Jump();
+        ClampPosition();
+    }
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
@@ -31,14 +39,25 @@ public class PlayerController : MonoBehaviour
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector2 moveDirection = new Vector2(horizontalInput, 0);
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, rb.velocity.y);
+
         if (horizontalInput > 0)
         {
-            spriteRenderer.flipX = false; 
+            spriteRenderer.flipX = false;
         }
         else if (horizontalInput < 0)
         {
-            spriteRenderer.flipX = true; 
+            spriteRenderer.flipX = true;
         }
     }
 
+    private bool isGrounded()
+    {
+        return Physics2D.BoxCast(boxCollider2D.bounds.center, boxCollider2D.bounds.size, 0f, Vector2.down, 0.1f, jumpableGround);
+    }
+
+    private void ClampPosition()
+    {
+        float clampedX = Mathf.Clamp(transform.position.x, -8.4f, 8.4f);
+        transform.position = new Vector3(clampedX, transform.position.y, transform.position.z);
+    }
 }
