@@ -3,9 +3,8 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     private static PlayerManager instance;
-
     private GameObject player;
-    public Vector2 initialPlayerPosition = new Vector2(-7, -3);
+    public Vector2 initialPlayerPosition = new Vector2(-8, -3);
     public static PlayerManager Instance
     {
         get
@@ -19,20 +18,17 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-
-    private void Start()
-    {
-        SpawnPlayer();
-    }
-
     private void SpawnPlayer()
     {
         player = Instantiate(Resources.Load<GameObject>("Prefabs/Player"), initialPlayerPosition, Quaternion.identity);
-        Debug.Log("Player spawned");
     }
 
     public GameObject GetPlayer()
     {
+        if (player == null)
+        {
+            SpawnPlayer();
+        }
         return player;
     }
 }

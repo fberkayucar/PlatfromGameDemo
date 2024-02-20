@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(int levelIndex)
     {
-        
+
     }
 
     public void RestartLevel()
     {
-
+        Debug.Log("Aþama2");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        PlayerManager.Instance.GetPlayer();
     }
 
     public void LoadNextLevel()

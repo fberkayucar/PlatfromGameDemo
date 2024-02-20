@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
+
 
     [SerializeField]
     private LayerMask jumpableGround;
@@ -18,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
     private Animator animator;
+    private bool isShooting;
+    public bool isBerryCollected=false;
 
 
     private void Start()
@@ -26,6 +30,7 @@ public class PlayerController : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        InvokeRepeating("EnableShooting", 0, 3f);
     }
 
     private void Update()
@@ -59,11 +64,11 @@ public class PlayerController : MonoBehaviour
             spriteRenderer.flipX = true;
         }
 
-        if (horizontalInput>0f)
+        if (horizontalInput > 0f)
         {
             animator.SetBool("isRunning", true);
         }
-        else if (horizontalInput<0f)
+        else if (horizontalInput < 0f)
         {
             animator.SetBool("isRunning", true);
         }
@@ -75,7 +80,8 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E) && isShooting && isBerryCollected)
         {
             if (spriteRenderer.flipX)
             {
@@ -86,7 +92,13 @@ public class PlayerController : MonoBehaviour
                 bulletRotation = Quaternion.Euler(0, 0, 90);
             }
             Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletRotation);
+            isShooting = false;
         }
+    }
+
+    void EnableShooting()
+    {
+        isShooting = true;
     }
 
     private bool isGrounded()

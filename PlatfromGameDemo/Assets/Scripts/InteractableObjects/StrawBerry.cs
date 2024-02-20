@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class StrawBerry : MonoBehaviour
 {
+    PlayerController playerController;
+
+    private void Start()
+    {
+        playerController = FindObjectOfType<PlayerController>();
+    }
     public void Interact()
     {
         Destroy(gameObject);
-        Debug.Log("Throwable collected!");
+        playerController.isBerryCollected = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
