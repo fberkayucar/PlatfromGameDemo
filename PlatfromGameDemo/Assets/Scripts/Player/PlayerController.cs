@@ -8,7 +8,8 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5f;
     public float jumpForce = 10f;
 
-
+    [SerializeField]
+    StrawBerry strawBerry;
     [SerializeField]
     private LayerMask jumpableGround;
     [SerializeField]
@@ -21,8 +22,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private bool isShooting;
-    public bool isBerryCollected=false;
-
 
     private void Start()
     {
@@ -81,7 +80,7 @@ public class PlayerController : MonoBehaviour
     private void Shoot()
     {
 
-        if (Input.GetKeyDown(KeyCode.E) && isShooting && isBerryCollected)
+        if (Input.GetKeyDown(KeyCode.E) && isShooting && GlobalVariables.isBerryCollected)
         {
             if (spriteRenderer.flipX)
             {

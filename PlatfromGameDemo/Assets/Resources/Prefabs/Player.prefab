@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   jumpForce: 5
+  strawBerry: {fileID: 2023272487950969920, guid: 975c6036c231144488b19e3e88812c1f, type: 3}
   jumpableGround:
     serializedVersion: 2
     m_Bits: 64

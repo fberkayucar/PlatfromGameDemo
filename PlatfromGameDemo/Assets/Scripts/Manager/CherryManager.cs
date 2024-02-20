@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CherryManager : MonoBehaviour
 {
-    void Start()
+    private void Start()
     {
-        Debug.Log(transform.childCount);
+        CherryCount();
+    }
+    void CherryCount()
+    {
+        GlobalVariables.cherryCount = transform.childCount;
     }
 }

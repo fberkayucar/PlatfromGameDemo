@@ -25,7 +25,11 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject GetPlayer()
     {
-        if (player == null)
+        if (player != null)
+        {
+            Destroy(player);
+        }
+        else if (player==null)
         {
             SpawnPlayer();
         }

@@ -20,6 +20,8 @@ public class PlayerDead : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Die();
+            GlobalVariables.isBerryCollected = false;
+            GlobalVariables.isLevelCompleted = false;
         }
     }
     private void Die()

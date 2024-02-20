@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class StrawBerry : MonoBehaviour
 {
-    PlayerController playerController;
-
-    private void Start()
-    {
-        playerController = FindObjectOfType<PlayerController>();
-    }
     public void Interact()
     {
+        GlobalVariables.isBerryCollected = true;
         Destroy(gameObject);
-        playerController.isBerryCollected = true;
+        Debug.Log("Berry Collected");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
