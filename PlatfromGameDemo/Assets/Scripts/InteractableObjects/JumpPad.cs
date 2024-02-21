@@ -13,6 +13,7 @@ public class JumpPad : MonoBehaviour, IInteractable
         animator = GetComponent<Animator>();
     }
 
+    //Etkileþime geç ve karakterin rigidbody'sine zýplama kuvveti uygula
     public void Interact()
     {
         Rigidbody2D playerRigidbody = PlayerManager.Instance.GetPlayer().GetComponent<Rigidbody2D>();

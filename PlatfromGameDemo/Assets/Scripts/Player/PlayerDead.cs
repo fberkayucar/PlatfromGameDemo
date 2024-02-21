@@ -17,6 +17,7 @@ public class PlayerDead : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Eðer çarpýþýlan nesne düþman ise karakter ölür ve toplanabilirler sýfýrlanýr
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Die();
@@ -26,11 +27,13 @@ public class PlayerDead : MonoBehaviour
     }
     private void Die()
     {
+        //Öldükten sonra static yaparak hareket etmesini engeller
         rb.bodyType = RigidbodyType2D.Static;
         animator.SetTrigger("Dead");
     }
     public void OnDeathAnimationComplete()
     {
+        //Ölüm animasyonu tamamlandýktan sonra oyunu yeniden baþlatýr
         Destroy(gameObject);
         gameManager.RestartLevel();
     }

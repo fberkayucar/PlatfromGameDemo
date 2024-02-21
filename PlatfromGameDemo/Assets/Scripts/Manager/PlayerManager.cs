@@ -2,9 +2,13 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    //Oyuncu nesnesinin spawn edildiði sýnýf
+
     private static PlayerManager instance;
     private GameObject player;
     public Vector2 initialPlayerPosition = new Vector2(-8, -3);
+    
+    //Singleton pattern
     public static PlayerManager Instance
     {
         get
@@ -19,6 +23,7 @@ public class PlayerManager : MonoBehaviour
     }
     private void Update()
     {
+        //Eðer oyuncu yoksa spawn et
         if (player == null)
         {
             SpawnPlayer();
@@ -29,6 +34,7 @@ public class PlayerManager : MonoBehaviour
         player = Instantiate(Resources.Load<GameObject>("Prefabs/Player"), initialPlayerPosition, Quaternion.identity);
     }
 
+    //Oyuncu nesnesini döndür
     public GameObject GetPlayer()
     {
         return player;

@@ -17,6 +17,7 @@ public class Throwable : MonoBehaviour
         rb.velocity = -transform.up * throwForce;
     }
 
+    //Düþmanla temas ettiðinde kendini ve düþmaný yok et
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
@@ -26,6 +27,7 @@ public class Throwable : MonoBehaviour
         }
     }
 
+    //Sýnýrlarýn dýþýna çýktýðýnda kendini yok et
     private void Bounds()
     {
         if (transform.position.x < -xBounds|| transform.position.x > xBounds)

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
     CanvasController canvasController;
 
+    //Singleton pattern
     public static GameManager Instance
     {
         get
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour
         Debug.Log(GlobalVariables.currentLevel);
         PlayerManager.Instance.GetPlayer();
     }
+
+    //Oyun kontrolleri
+
 
 
     public void RestartLevel()

@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Cherry : MonoBehaviour, IInteractable
 {
+
+    //Üzümlerle etkileþime geçme
     public void Interact()
     {
         Destroy(gameObject);
-        Debug.Log("Item collected!");
         GlobalVariables.cherryCount--;
-        Debug.Log("Cherry count: " + GlobalVariables.cherryCount);
         if (GlobalVariables.cherryCount == 0)
         {
+            //Üzümler toplandýðýnda levelý tamamlar
             GlobalVariables.isLevelCompleted = true;
         }
     }

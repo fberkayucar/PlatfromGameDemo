@@ -27,9 +27,11 @@ public class CanvasController : MonoBehaviour
 
     private void Start()
     {
+        //Sahne deðiþtiðinde canvasin yok olmamasý için
         DontDestroyOnLoad(gameObject);
     }
 
+    //Çilek sayýsýný güncelle ve ekrana yazdýr
     private void UpdateCherryCount()
     {
         cherryText.text = GlobalVariables.cherryCount.ToString();
@@ -44,6 +46,7 @@ public class CanvasController : MonoBehaviour
         }
     }
 
+    //Zamaný güncelle ve ekrana yazdýr
     void UpdateTimeText()
     {
         int minutes = (int)(elapsedTime / 60f);
@@ -56,6 +59,7 @@ public class CanvasController : MonoBehaviour
         totalTimeText.text = string.Format("Total Time: {0:00}:{1:00}", totalMinutes, totalSeconds);
     }
 
+    //Level tamamlandýðýnda zamaný durdur ve ekrana yazdýr
     public void LevelCompleted()
     {
         counterActive = false;
@@ -63,18 +67,22 @@ public class CanvasController : MonoBehaviour
         UpdateTimeText();
     }
 
+    //Zamaný sýfýrla ve tekrar baþlat
     public void RestartTimer()
     {
         counterActive = true;
         elapsedTime = 0f;
     }
 
+    //GameManager instance'ý çaðýrýyorum ve GameManager nesnesi oluþuyor.
     public void PlayButton()
     {
         counterActive = true;
         GameManager.Instance.GameStart();
         Destroy(instructionsPanel);
     }
+
+    //Oyun sonu ekraný
     private void EndGame()
     {
         if (GlobalVariables.isGameFinished)

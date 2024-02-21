@@ -13,6 +13,7 @@ public class FlagManager : MonoBehaviour
     {
         AnimationController();
     }
+    //Üzümler toplanmýþsa bayraðý aktif et deðilse deaktif et
     private void AnimationController()
     {
         if (GlobalVariables.isLevelCompleted)
@@ -24,6 +25,8 @@ public class FlagManager : MonoBehaviour
             animator.SetBool("isBerriesCollected", false);
         }
     }
+
+    //Son levelsa oyunu bitir deðilse bir sonraki levela geç
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (GlobalVariables.isLevelCompleted&& GlobalVariables.currentLevel==2) 
