@@ -1,13 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
+    CanvasController canvasController;
 
-    private int currentLevel = 0;
-
-    // Singleton instance oluþturma
     public static GameManager Instance
     {
         get
@@ -30,23 +29,30 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(currentLevel);
+        canvasController = FindObjectOfType<CanvasController>();
+        Debug.Log(GlobalVariables.currentLevel);
         PlayerManager.Instance.GetPlayer();
     }
 
+
     public void RestartLevel()
     {
+        canvasController.RestartTimer();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        PlayerManager.Instance.GetPlayer();
     }
 
     public void LoadNextLevel()
     {
-        Debug.Log("Level Completed!");
-        currentLevel++;
-        SceneManager.LoadScene(currentLevel);
+        canvasController.LevelCompleted();
+        canvasController.RestartTimer();
+        GlobalVariables.isLevelCompleted = false;
+        GlobalVariables.isBerryCollected = false;
+        GlobalVariables.currentLevel++;
         PlayerManager.Instance.GetPlayer();
+        SceneManager.LoadScene(GlobalVariables.currentLevel);
     }
+
+    
 
     public void GameStart()
     {

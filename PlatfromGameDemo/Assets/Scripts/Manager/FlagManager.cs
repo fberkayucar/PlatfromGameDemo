@@ -5,10 +5,8 @@ using UnityEngine;
 public class FlagManager : MonoBehaviour
 {
     Animator animator;
-
     private void Start()
     {
-        GameManager.Instance.GameStart();
         animator = GetComponent<Animator>();
     }
     private void Update()
@@ -28,6 +26,10 @@ public class FlagManager : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (GlobalVariables.isLevelCompleted&& GlobalVariables.currentLevel==2) 
+        {
+            GlobalVariables.isGameFinished = true;
+        }
         if (GlobalVariables.isLevelCompleted)
         {
             GameManager.Instance.LoadNextLevel();

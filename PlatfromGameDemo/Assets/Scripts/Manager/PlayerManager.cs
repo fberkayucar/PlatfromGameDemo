@@ -17,7 +17,13 @@ public class PlayerManager : MonoBehaviour
             return instance;
         }
     }
-
+    private void Update()
+    {
+        if (player == null)
+        {
+            SpawnPlayer();
+        }
+    }
     private void SpawnPlayer()
     {
         player = Instantiate(Resources.Load<GameObject>("Prefabs/Player"), initialPlayerPosition, Quaternion.identity);
@@ -25,14 +31,6 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject GetPlayer()
     {
-        if (player != null)
-        {
-            Destroy(player);
-        }
-        else if (player==null)
-        {
-            SpawnPlayer();
-        }
         return player;
     }
 }
