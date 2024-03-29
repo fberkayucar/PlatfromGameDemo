@@ -29,10 +29,10 @@ public class FlagManager : MonoBehaviour
     //Son levelsa oyunu bitir deðilse bir sonraki levela geç
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (GlobalVariables.isLevelCompleted&& GlobalVariables.currentLevel==2) 
-        {
-            GlobalVariables.isGameFinished = true;
-        }
+        //if (GlobalVariables.isLevelCompleted&& GlobalVariables.currentLevel==2) 
+        //{
+        //    GlobalVariables.isGameFinished = true;
+        //}
         if (GlobalVariables.isLevelCompleted)
         {
             GameManager.Instance.LoadNextLevel();

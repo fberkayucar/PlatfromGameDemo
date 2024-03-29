@@ -30,9 +30,15 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        canvasController = FindObjectOfType<CanvasController>();
-        Debug.Log(GlobalVariables.currentLevel);
+        canvasController = FindAnyObjectByType<CanvasController>();
         PlayerManager.Instance.GetPlayer();
+    }
+    private void Update()
+    {
+        if (canvasController == null)
+        {
+            canvasController = FindAnyObjectByType<CanvasController>();
+        }
     }
 
     //Oyun kontrolleri
@@ -41,14 +47,16 @@ public class GameManager : MonoBehaviour
 
     public void RestartLevel()
     {
-        canvasController.RestartTimer();
+        if (!GlobalVariables.isFirstLevelPassed)
+        {
+            canvasController.Destroy();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LoadNextLevel()
     {
-        canvasController.LevelCompleted();
-        canvasController.RestartTimer();
+        GlobalVariables.isFirstLevelPassed = true;
         GlobalVariables.isLevelCompleted = false;
         GlobalVariables.isBerryCollected = false;
         GlobalVariables.currentLevel++;

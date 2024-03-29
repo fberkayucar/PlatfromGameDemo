@@ -25,8 +25,11 @@ public class JumpPad : MonoBehaviour, IInteractable
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Interact();
-        animator.SetBool("isJumping", true);
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Interact();
+            animator.SetBool("isJumping", true);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)

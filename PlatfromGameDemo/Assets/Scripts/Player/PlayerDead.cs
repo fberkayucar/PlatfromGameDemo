@@ -18,14 +18,14 @@ public class PlayerDead : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //Eðer çarpýþýlan nesne düþman ise karakter ölür ve toplanabilirler sýfýrlanýr
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy")||collision.gameObject.CompareTag("Trap"))
         {
             Die();
             GlobalVariables.isBerryCollected = false;
             GlobalVariables.isLevelCompleted = false;
         }
     }
-    private void Die()
+    public void Die()
     {
         //Öldükten sonra static yaparak hareket etmesini engeller
         rb.bodyType = RigidbodyType2D.Static;

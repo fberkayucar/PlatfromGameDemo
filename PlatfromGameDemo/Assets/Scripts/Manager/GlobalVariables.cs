@@ -10,4 +10,5 @@ public class GlobalVariables : MonoBehaviour
     public static bool isLevelCompleted = false;
     public static int currentLevel = 0;
     public static bool isGameFinished = false;
+    public static bool isFirstLevelPassed = false;
 }
